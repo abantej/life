@@ -7,6 +7,12 @@ import org.junit.jupiter.api.Test;
 /**
  * Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes,
  * write a method to rotate the image by 90 degrees. Can you do this in place?
+ *
+ * Hint #1: Try thinking about it layer by layer. Can you rotate a specific layer?
+ *
+ * Hint #2: Rotating a specific layer would just mean swapping the values in four arrays.
+ * If you were asked to swap the values in two arrays, could you do this? Can you then
+ * extend it to four arrays?
  */
 public class Solution007_RotateMatrix {
 
@@ -45,11 +51,7 @@ public class Solution007_RotateMatrix {
 
         print(mtx);
 
-        for (int i = 0; i < rtd_mtx.length; i++) {
-            for (int k = 0; k < rtd_mtx.length; k++) {
-                assertEquals(mtx[i][k], rtd_mtx[i][k]);
-            }
-        }
+        assertmtx(mtx, rtd_mtx);
 
         int[][] mtx_5 = new int[5][];
         mtx_5[0] = new int[]{ 1,  2,  3,  4, 5};
@@ -71,12 +73,7 @@ public class Solution007_RotateMatrix {
 
         print(rtd_mtx_5);
 
-        for (int i = 0; i < rtd_mtx_5.length; i++) {
-            for (int k = 0; k < rtd_mtx_5.length; k++) {
-                assertEquals(mtx_5[i][k], rtd_mtx_5[i][k]);
-            }
-        }
-
+        assertmtx(mtx_5, rtd_mtx_5);
 
 
         int[][] mtx_6 = new int[6][];
@@ -101,13 +98,17 @@ public class Solution007_RotateMatrix {
 
         print(mtx_6);
 
-        for (int i = 0; i < rtd_mtx_6.length; i++) {
-            for (int k = 0; k < rtd_mtx_6.length; k++) {
-                assertEquals(mtx_6[i][k], rtd_mtx_6[i][k]);
+        assertmtx(mtx_6, rtd_mtx_6);
+
+
+    }
+
+    private void assertmtx(int[][] mtx, int[][] rtd_mtx) {
+        for (int i = 0; i < rtd_mtx.length; i++) {
+            for (int k = 0; k < rtd_mtx.length; k++) {
+                assertEquals(mtx[i][k], rtd_mtx[i][k]);
             }
         }
-
-
     }
 
     private void print(int[][] mtx) {
