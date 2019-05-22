@@ -1,4 +1,4 @@
-package algorithms;
+package algorithms.linkedlist;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import java.util.Set;
  *
  *
  */
-public class Solution010_RemoveDups {
+public class Solution001_RemoveDups {
     private class Node {
         int data;
         Node next;

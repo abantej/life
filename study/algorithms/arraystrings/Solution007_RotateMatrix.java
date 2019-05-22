@@ -1,4 +1,4 @@
-package algorithms;
+package algorithms.arraystrings;
 
 import static org.junit.jupiter.api.Assertions.*;
 
