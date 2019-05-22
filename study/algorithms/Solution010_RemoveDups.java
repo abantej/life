@@ -23,17 +23,17 @@ public class Solution010_RemoveDups {
 
     void removeDups(Node head) {
         Set<Integer> nodes = new HashSet<>();
-        Node curr = head;
-        Node next = head.next;
         nodes.add(head.data);
-        while (next != null) {
-            if (nodes.contains(next.data)) {
-                curr.next = next;
+        Node prev = head;
+        Node curr = head.next;
+        while (curr != null) {
+            if (nodes.contains(curr.data)) {
+                prev.next = curr.next;
             } else {
-                nodes.add(next.data);
+                nodes.add(curr.data);
             }
-            next = next.next;
-            curr = next;
+            prev = curr;
+            curr = curr.next;
         }
     }
 
