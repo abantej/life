@@ -9,7 +9,11 @@ import java.util.Set;
 /**
  * Write code to remove duplicates from an unsorted linked list.
  *
+ * Hint #1: Have you tried a hash table? You should be able to do this in a
+ * single pass of the linked list.
  *
+ * Hint #2: Without extra space you'll need O(N^2) time. Try using two pointers,
+ * where the second one searches ahead of the first one.
  */
 public class Solution001_RemoveDups {
     private class Node {
@@ -21,6 +25,7 @@ public class Solution001_RemoveDups {
         }
     }
 
+    // Solution 1: Using a buffer
     void removeDups(Node head) {
         Set<Integer> nodes = new HashSet<>();
         nodes.add(head.data);
@@ -37,6 +42,23 @@ public class Solution001_RemoveDups {
         }
     }
 
+    // Solution 2: Using a runner
+    void removeDupsRunner(Node head) {
+        Node curr = head;
+        while (curr != null) {
+            Node prev = curr;
+            Node next = curr.next;
+            while (next != null) {
+                if (curr.data == next.data) {
+                    prev.next = next.next;
+                }
+                prev = next;
+                next = next.next;
+            }
+            curr = curr.next;
+        }
+    }
+
     @Test
     public void removeDupsTest() {
         Node head = new Node(1);
@@ -46,7 +68,7 @@ public class Solution001_RemoveDups {
         head.next.next.next.next = new Node(5);
         head.next.next.next.next.next = new Node(5);
 
-        removeDups(head);
+        removeDupsRunner(head);
 
         Node newHead = new Node(1);
         newHead.next = new Node(2);
