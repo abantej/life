@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
  * Hint #4: You might find it useful to return multiple values. Some languages don't directly support this,
  * but there are workarounds in essentially any language. What are some of those workarounds?
  */
-public class Solution001_ReturnKthToLast {
+public class Solution002_ReturnKthToLast {
 
     private class Node {
         int data;
