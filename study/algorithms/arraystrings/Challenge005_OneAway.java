@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * if they are one edit (or zero edits) away.
  * Hints: #23, #97, #130
  */
-public class Solution005_OneAway {
+public class Challenge005_OneAway {
 
     boolean oneInsert(String s, String t) {
         int idx1 = 0;

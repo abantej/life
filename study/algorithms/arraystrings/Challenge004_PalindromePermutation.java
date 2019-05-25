@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * A permutation is a rearrangement of letters. The palindrome does not need to be
  * limited to just dictionary words.
  */
-public class Solution004_PalindromePermutation {
+public class Challenge004_PalindromePermutation {
 
     boolean isPalindromePermutation(String s) {
         // step 1: brute force

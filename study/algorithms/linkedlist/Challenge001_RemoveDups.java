@@ -15,7 +15,7 @@ import java.util.Set;
  * Hint #2: Without extra space you'll need O(N^2) time. Try using two pointers,
  * where the second one searches ahead of the first one.
  */
-public class Solution001_RemoveDups {
+public class Challenge001_RemoveDups {
     private class Node {
         int data;
         Node next;

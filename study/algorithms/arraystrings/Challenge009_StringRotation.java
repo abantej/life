@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * Hint #3: Think about the earlier hint. Then think about what happens when you concatenate erbottlewat to itself.
  * You get erbottlewaterbottlewat
  */
-public class Solution009_StringRotation {
+public class Challenge009_StringRotation {
 
     boolean isSubstring(String s, String t) {
         if (s.length() != t.length()) {

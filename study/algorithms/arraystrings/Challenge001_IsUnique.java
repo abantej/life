@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
  *  Hint #3: Can you solve it in O(N log N) time? What might a solution like that look like?
  */
 
-public class Solution001_IsUnique {
+public class Challenge001_IsUnique {
 
     boolean isUniqueChars(String s) {
         if (s == null || s.isEmpty() || s.length() > 128) {

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
  * Hint #2:
  */
 
-public class Solution003_URLify {
+public class Challenge003_URLify {
     String urlify(String s, int len) {
         if (s == null || s.trim().isEmpty()) {
             return s;

@@ -25,7 +25,7 @@ import java.util.Arrays;
  *  Attempt 2: you used the wrong variable for getting the character
  */
 
-public class Solution002_CheckPermutation {
+public class Challenge002_CheckPermutation {
 
     String sort(String s) {
         char[] chars = s.toCharArray();

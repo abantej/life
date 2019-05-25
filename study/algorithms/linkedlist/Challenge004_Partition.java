@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
  * to ensure that elements less than the pivot must be before elements greater than the
  * pivot. Does that help you come up with more solutions?
  */
-public class Solution004_Partition {
+public class Challenge004_Partition {
 
     private class Node {
         int data;

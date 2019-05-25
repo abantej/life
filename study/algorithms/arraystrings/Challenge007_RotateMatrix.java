@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
  * If you were asked to swap the values in two arrays, could you do this? Can you then
  * extend it to four arrays?
  */
-public class Solution007_RotateMatrix {
+public class Challenge007_RotateMatrix {
 
     public void rotate(int[][] mtx) {
         int rotation = mtx.length - 1;

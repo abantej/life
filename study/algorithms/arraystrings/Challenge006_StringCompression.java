@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * and lowercase letters (a - z).
  *
  */
-public class Solution006_StringCompression {
+public class Challenge006_StringCompression {
 
     String compress(String s) {
         StringBuffer t = new StringBuffer("");

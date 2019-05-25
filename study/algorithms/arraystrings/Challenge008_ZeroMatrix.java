@@ -3,7 +3,7 @@ package algorithms.arraystrings;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-public class Solution008_ZeroMatrix {
+public class Challenge008_ZeroMatrix {
 
     void zeroMatrix(int[][] mtx) {
         for (int i = 0; i < mtx.length; i++) {
