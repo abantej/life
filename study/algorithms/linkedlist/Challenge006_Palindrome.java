@@ -58,6 +58,31 @@ public class Challenge006_Palindrome {
         return true;
     }
 
+    boolean isPalindromeRunner(Node head) {
+        Stack<Character> stack = new Stack<Character>();
+        Node fast = head;
+        Node slow = head;
+
+        while (fast != null && fast.next != null) {
+            stack.push(slow.data);
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+
+        if (fast != null) {
+            slow = slow.next;
+        }
+
+        while (slow != null) {
+            if (slow.data != stack.pop()) {
+                return false;
+            }
+            slow = slow.next;
+        }
+
+        return true;
+    }
+
     @Test
     public void isPalindromeTest() {
         Node head = new Node('a');
@@ -70,6 +95,7 @@ public class Challenge006_Palindrome {
 
         assertTrue(isPalindrome(head));
         assertTrue(isPalindromeStack(head));
+        assertTrue(isPalindromeRunner(head));
 
         head = new Node('j');
         head.next = new Node('o');
@@ -81,5 +107,6 @@ public class Challenge006_Palindrome {
 
         assertFalse(isPalindrome(head));
         assertFalse(isPalindromeStack(head));
+        assertFalse(isPalindromeRunner(head));
     }
 }
