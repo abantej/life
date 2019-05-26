@@ -20,18 +20,46 @@ public class Challenge007_Intersection_Solution03_ByLength {
         }
     }
 
-    Node intersect(Node head, Node another_head) {
-        Node head_curr = head;
-        while (head_curr != null) {
-            Node another_head_curr = another_head;
-            while (another_head_curr != null) {
-                if (head_curr == another_head_curr) {
-                    return another_head_curr;
-                }
-                another_head_curr = another_head_curr.next;
-            }
-            head_curr = head_curr.next;
+    private class NodeLength {
+        int length;
+        Node tail;
+        NodeLength(int length, Node  tail) {
+            this.length = length;
+            this.tail = tail;
         }
+    }
+
+    NodeLength getNodeLength(Node head) {
+        int count = 0;
+        while (head != null) {
+            count ++;
+            head = head.next;
+        }
+        return new NodeLength(count, head);
+    }
+
+    Node intersect(Node head, Node another_head) {
+        NodeLength headNodeLength = getNodeLength(head);
+        NodeLength another_headNodeLength = getNodeLength(another_head);
+
+        Node bigger = headNodeLength.length >= another_headNodeLength.length ? head : another_head;
+        Node smaller =  headNodeLength.length >= another_headNodeLength.length ? another_head : head;
+        int extraNodesSize = Math.abs(headNodeLength.length - another_headNodeLength.length);
+
+        for (int i = 0; i < extraNodesSize; i++) {
+            bigger = bigger.next;
+        }
+
+        while (bigger != null) {
+
+            if (bigger == smaller) {
+                return bigger;
+            }
+
+            bigger = bigger.next;
+            smaller = smaller.next;
+        }
+
         return new Node(-1);
     }
 
