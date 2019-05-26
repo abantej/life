@@ -83,6 +83,50 @@ public class Challenge006_Palindrome {
         return true;
     }
 
+    int lengthOfList(Node n) {
+        int size = 0;
+        while (n != null) {
+            size ++;
+            n = n.next;
+        }
+        return size;
+    }
+
+    private class Result {
+        Node node;
+        boolean result;
+        Result(Node node, boolean result) {
+            this.node = node;
+            this.result = result;
+        }
+    }
+
+    boolean isPalindromeRecurseMain(Node head) {
+        int length = lengthOfList(head);
+        Result p = isPalindromeRecurse(head, length);
+        return p.result;
+    }
+
+    Result isPalindromeRecurse(Node head, int length) {
+        if (head == null || length <= 0) {
+            return new Result(head, true);
+        } else if (length == 1) {
+            return new Result(head.next, true);
+        }
+
+        Result res = isPalindromeRecurse(head.next, length - 2);
+
+        if (!res.result || res.node == null) {
+            return res;
+        }
+
+        res.result = (head.data == res.node.data);
+
+        res.node = res.node.next;
+
+        return res;
+    }
+
     @Test
     public void isPalindromeTest() {
         Node head = new Node('a');
@@ -96,6 +140,7 @@ public class Challenge006_Palindrome {
         assertTrue(isPalindrome(head));
         assertTrue(isPalindromeStack(head));
         assertTrue(isPalindromeRunner(head));
+        assertTrue(isPalindromeRecurseMain(head));
 
         head = new Node('j');
         head.next = new Node('o');
@@ -108,5 +153,6 @@ public class Challenge006_Palindrome {
         assertFalse(isPalindrome(head));
         assertFalse(isPalindromeStack(head));
         assertFalse(isPalindromeRunner(head));
+        assertFalse(isPalindromeRecurseMain(head));
     }
 }
