@@ -9,7 +9,7 @@ import java.util.*;
  *
  *
  */
-public class ThreeInOne {
+public class Challenge001_ThreeInOne {
 
     ArrayList<Integer> list = new ArrayList<>(3);
 
