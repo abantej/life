@@ -1,6 +1,7 @@
 package algorithms.treegraphs;
 
 import java.util.LinkedList;
+import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
@@ -13,105 +14,74 @@ public class Challenge001_RouteBetweenNodes {
         Unvisited, Visited, Visiting;
     }
 
-    private class Node {
-        Node[] adjacent;
-        int adjacentCount;
-        String vertex;
-        State state;
-        Node (String vertex, int adjacentLength) {
-            this.vertex = vertex;
-            adjacentCount = 0;
-            adjacent = new Node[adjacentLength];
+    private class Vertex {
+        String name;
+        State state = State.Unvisited;;
+        ArrayList<Vertex> adjacentVertices = new ArrayList<>();
+        Vertex(String name) {
+            this.name = name;
         }
 
-        void addAdjacent(Node node) {
-            if (this.adjacentCount < adjacent.length) {
-                this.adjacent[adjacentCount] = node;
-                adjacentCount ++;
-            } else {
-                throw new RuntimeException("No more adjacent can be added.");
-            }
+        void addAdjacentVertex(Vertex vertex) {
+            this.adjacentVertices.add(vertex);
         }
     }
 
     private class Graph {
-        Node vertices[];
-        int count;
-        Graph() {
-            vertices = new Node[6];
-            count = 0;
-        }
-
-        void addNode(Node node) {
-            if (count < vertices.length) {
-                vertices[count] = node;
-                count ++;
-            } else {
-                throw new RuntimeException("Graph is full.");
-            }
+        ArrayList<Vertex> vertices = new ArrayList<>();
+        void addVertex(Vertex vertex) {
+            vertices.add(vertex);
         }
     }
 
-    Graph createNewGraph() {
-        Graph graph = new Graph();
-        Node[] temp = new Node[6];
-
-        temp[0] = new Node("a", 3);
-        temp[1] = new Node("b", 0);
-        temp[2] = new Node("c", 0);
-        temp[3] = new Node("d", 1);
-        temp[4] = new Node("e", 1);
-        temp[5] = new Node("f", 3);
-
-        temp[0].addAdjacent(temp[1]);
-        temp[0].addAdjacent(temp[2]);
-        temp[0].addAdjacent(temp[3]);
-        temp[3].addAdjacent(temp[4]);
-        temp[4].addAdjacent(temp[5]);
-
-        for (int i = 0; i < 6; i++) {
-            graph.addNode(temp[i]);
-        }
-        return graph;
-    }
-
-    boolean search(Graph graph, Node start, Node end) {
+    boolean search(Graph graph, Vertex start, Vertex end) {
         if (start == end) return true;
 
-        LinkedList<Node> queue = new LinkedList<>();
-
-        for (Node u : graph.vertices) {
-            u.state = State.Unvisited;
-        }
-
+        LinkedList<Vertex> queue = new LinkedList<>();
         start.state = State.Visiting;
         queue.add(start);
 
-        Node u;
         while (!queue.isEmpty()) {
-            u = queue.removeFirst();
-            if (u != null) {
-                for (Node v: u.adjacent) {
-                    if (v.state == State.Unvisited) {
-                        if (v == end) {
-                            return true;
-                        } else {
-                            v.state = State.Visiting;
-                            queue.add(v);
-                        }
+            Vertex vertex = queue.removeFirst();
+            for (Vertex v: vertex.adjacentVertices) {
+                if (v.state == State.Unvisited) {
+                    if (v == end) {
+                        return true;
+                    } else {
+                        v.state = State.Visiting;
+                        queue.add(v);
                     }
                 }
-                u.state = State.Visited;
             }
+            vertex.state = State.Visited;
         }
         return false;
     }
 
     @Test
     public void searchTest() {
-        Graph graph = createNewGraph();
-        Node a = graph.vertices[0];
-        Node f = graph.vertices[5];
+        Graph graph = new Graph();
+        Vertex[] temp = new Vertex[6];
+
+        temp[0] = new Vertex("a");
+        temp[1] = new Vertex("b");
+        temp[2] = new Vertex("c");
+        temp[3] = new Vertex("d");
+        temp[4] = new Vertex("e");
+        temp[5] = new Vertex("f");
+
+        temp[0].addAdjacentVertex(temp[1]);
+        temp[0].addAdjacentVertex(temp[2]);
+        temp[0].addAdjacentVertex(temp[3]);
+        temp[3].addAdjacentVertex(temp[4]);
+        temp[4].addAdjacentVertex(temp[5]);
+
+        for (int i = 0; i < 6; i++) {
+            graph.addVertex(temp[i]);
+        }
+
+        Vertex a = graph.vertices.get(0);
+        Vertex f = graph.vertices.get(5);
         assertTrue(search(graph, a, f));
     }
 }
