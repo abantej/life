@@ -1,87 +1,78 @@
 package algorithms.treegraphs;
 
-import java.util.LinkedList;
 import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+import java.util.LinkedList;
 
-/**
- * Given a directed graph, design an algorithm to find out whether  there is a route between two nodes.
- */
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 public class Challenge001_RouteBetweenNodes {
 
     private enum State {
-        Unvisited, Visited, Visiting;
+        UNVISITED, VISITING, VISITED;
     }
 
     private class Vertex {
         String name;
-        State state = State.Unvisited;;
         ArrayList<Vertex> adjacentVertices = new ArrayList<>();
-        Vertex(String name) {
+        State state = State.UNVISITED;
+        public Vertex(String name) {
             this.name = name;
-        }
-
-        void addAdjacentVertex(Vertex vertex) {
-            this.adjacentVertices.add(vertex);
         }
     }
 
     private class Graph {
         ArrayList<Vertex> vertices = new ArrayList<>();
-        void addVertex(Vertex vertex) {
-            vertices.add(vertex);
-        }
     }
 
-    boolean search(Graph graph, Vertex start, Vertex end) {
-        if (start == end) return true;
+    private boolean search(Vertex s, Vertex e) {
+        if (s == e) return true;
 
         LinkedList<Vertex> queue = new LinkedList<>();
-        start.state = State.Visiting;
-        queue.add(start);
+        s.state = State.VISITING;
+        queue.add(s);
 
         while (!queue.isEmpty()) {
             Vertex vertex = queue.removeFirst();
             for (Vertex v: vertex.adjacentVertices) {
-                if (v.state == State.Unvisited) {
-                    if (v == end) {
+                if (v.state == State.UNVISITED) {
+                    if (v == e) {
                         return true;
                     } else {
-                        v.state = State.Visiting;
+                        v.state = State.VISITING;
                         queue.add(v);
                     }
                 }
             }
-            vertex.state = State.Visited;
+            vertex.state = State.VISITED;
         }
+
         return false;
     }
 
     @Test
     public void searchTest() {
+        Vertex a = new Vertex("a");
+        Vertex b = new Vertex("b");
+        Vertex c = new Vertex("c");
+        Vertex d = new Vertex("d");
+        Vertex e = new Vertex("e");
+        Vertex f = new Vertex("f");
+
+        a.adjacentVertices.add(b);
+        a.adjacentVertices.add(c);
+        a.adjacentVertices.add(d);
+        d.adjacentVertices.add(e);
+        e.adjacentVertices.add(f);
+
         Graph graph = new Graph();
-        Vertex[] temp = new Vertex[6];
+        graph.vertices.add(a);
+        graph.vertices.add(b);
+        graph.vertices.add(c);
+        graph.vertices.add(d);
+        graph.vertices.add(e);
+        graph.vertices.add(f);
 
-        temp[0] = new Vertex("a");
-        temp[1] = new Vertex("b");
-        temp[2] = new Vertex("c");
-        temp[3] = new Vertex("d");
-        temp[4] = new Vertex("e");
-        temp[5] = new Vertex("f");
-
-        temp[0].addAdjacentVertex(temp[1]);
-        temp[0].addAdjacentVertex(temp[2]);
-        temp[0].addAdjacentVertex(temp[3]);
-        temp[3].addAdjacentVertex(temp[4]);
-        temp[4].addAdjacentVertex(temp[5]);
-
-        for (int i = 0; i < 6; i++) {
-            graph.addVertex(temp[i]);
-        }
-
-        Vertex a = graph.vertices.get(0);
-        Vertex f = graph.vertices.get(5);
-        assertTrue(search(graph, a, f));
+        assertTrue(search(a, b));
     }
 }
