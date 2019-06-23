@@ -36,7 +36,7 @@ public class Challenge002_MinimalTree {
 
     @Test
     public void creaetMinimalBSTTest() {
-        int[] arr = new int[7];
+        int[] arr = new int[15];
         arr[0] = 0;
         arr[1] = 1;
         arr[2] = 2;
@@ -44,7 +44,15 @@ public class Challenge002_MinimalTree {
         arr[4] = 4;
         arr[5] = 5;
         arr[6] = 6;
+        arr[7] = 7;
+        arr[8] = 8;
+        arr[9] = 9;
+        arr[10] = 10;
+        arr[11] = 11;
+        arr[12] = 12;
+        arr[13] = 13;
+        arr[14] = 14;
         Node bst = creaetMinimalBST(arr);
-        assertEquals(3, bst.data);
+        assertEquals(7, bst.data);
     }
 }
