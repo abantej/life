@@ -22,9 +22,9 @@ public class Challenge003_ListOfDepths {
     void createLevelLinkedList(Node root, ArrayList<LinkedList<Node>> lists, int level) {
         if (root == null) return;
 
-        LinkedList<Node> list = null;
+        LinkedList list = null;
         if (lists.size() == level) {
-            list = new LinkedList<Node>();
+            list = new LinkedList<>();
             lists.add(list);
         } else {
             list = lists.get(level);
@@ -35,8 +35,22 @@ public class Challenge003_ListOfDepths {
     }
 
     ArrayList<LinkedList<Node>> createLevelLinkedList(Node root) {
-        ArrayList<LinkedList<Node>> lists = new ArrayList<LinkedList<Node>>();
+        ArrayList<LinkedList<Node>> lists = new ArrayList<>();
         createLevelLinkedList(root, lists, 0);
         return lists;
+    }
+
+    @Test
+    public void createLevelLinkedList() {
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+
+        root.right.left = new Node(6);
+        root.right.right = new Node(7);
+        ArrayList<LinkedList<Node>> lists = createLevelLinkedList(root);
+        System.out.println();
     }
 }
